@@ -26,6 +26,7 @@
             <td>ID</td>
             <td>Название</td>
             <td>Цена</td>
+            <td>Категория</td>
             <td></td>
             <td></td>
         </tr>
@@ -35,6 +36,7 @@
             <td>{{p.id}}</td>
             <td>{{p.title}}</td>
             <td>{{p.price}}</td>
+            <td>{{p.categoryTitle}}</td>
             <td>
                 <button class="btn btn-danger" ng-click="deleteProduct(p.id)">Удалить</button>
             </td>
@@ -49,10 +51,10 @@
     <p></p>
     <form class="row g-3" ng-submit="createNewProduct()">
         <div class="col-auto">
-            <input type="text" class="form-control" id="newProductTitle" ng-model="newProduct.title" placeholder="Название">
+            <input type="text"  id="newProductTitle" ng-model="newProduct.title" placeholder="Название">
         </div>
         <div class="col-auto">
-            <input type="number" class="form-control" id="newProductPrice" ng-model="newProduct.price" placeholder="Цена">
+            <input type="number"  id="newProductPrice" ng-model="newProduct.price" placeholder="Цена">
         </div>
         <div class="col-auto">
             <button type="submit" class="btn btn-primary mb-3">Создать</button>
@@ -66,19 +68,45 @@
         <tr>
             <td>ID</td>
             <td>Название</td>
-            <td>Цена</td>
-            <td></td>
+
+            <td>Колличество</td>
+
+            <td>Цена за шт.</td>
+            <td>Общая стоимость</td>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="c in cartList">
-            <td>{{c.id}}</td>
-            <td>{{c.title}}</td>
+<!--            <td>{{c.items.productId}}</td>-->
+<!--            <td>{{c.items.productTitle}}</td>-->
+<!--            <td>{{c.items.quantity}}</td>-->
+<!--            <td>{{c.items.pricePerProduct}}</td>-->
+<!--            <td>{{c.items.price}}</td>-->
+            <td>{{c.productId}}</td>
+            <td>{{c.productTitle}}</td>
+            <td><button type="button" class="btn btn-primary btn-sm" ng-click="addProductToCart(c.productId)">+
+            </button>
+                {{c.quantity}}
+                <button type="button" class="btn btn-primary btn-sm" ng-click="deleteOneProductFromCart(c.productId)">-
+                </button>
+            </td>
+
+            <td>{{c.pricePerProduct}}</td>
             <td>{{c.price}}</td>
 
         </tr>
+
         </tbody>
     </table>
+
+    <p>
+        {{total}}
+    </p>
+
+    <div>
+        <button type="button" class="btn btn-danger" ng-click="clearCart()" align=”left”>Очистить корзину</button>
+    </div>
+
 </div>
 </body>
 </html>
