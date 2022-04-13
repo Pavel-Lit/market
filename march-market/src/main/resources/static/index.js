@@ -24,7 +24,7 @@ angular.module('market', []).controller('indexController', function ($scope, $ht
     }
 
     $scope.addProductToCart = function (id){
-        $http.get('http://localhost:8189/market/api/v1/cart/' + id)
+        $http.get('http://localhost:8189/market/api/v1/cart/add/' + id)
             .then(function (response){
                 $scope.fillCart();
                 }
@@ -33,9 +33,34 @@ angular.module('market', []).controller('indexController', function ($scope, $ht
     $scope.fillCart = function (){
         $http.get('http://localhost:8189/market/api/v1/cart')
             .then(function (response){
-                $scope.cartList = response.data;
+                $scope.cartList = response.data.items;
+                console.log(response);
             })
     }
+
+    $scope.totalPrice = function (){
+        $http.get('http://localhost:8189/market/api/v1/cart')
+            .then(function (response){
+                $scope.total = response.data.totalPrice;
+            })
+    }
+    $scope.clearCart = function (){
+        $http.get('http://localhost:8189/market/api/v1/cart/clear')
+            .then(function (response){
+                $scope.fillCart();
+                console.log(response);
+            })
+    }
+    $scope.deleteOneProductFromCart = function (productId){
+        $http.get('http://localhost:8189/market/api/v1/cart/remove/' + productId)
+            .then(function (response){
+            $scope.fillCart();
+            console.log(response);
+        })
+    }
+
+
+
     $scope.fillCart();
     $scope.fillTable();
 });

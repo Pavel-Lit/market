@@ -2,8 +2,9 @@ package ru.geekbrains.marchmarket.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.marchmarket.dtos.CreateNewProductDto;
+import ru.geekbrains.marchmarket.dtos.ProductDto;
 import ru.geekbrains.marchmarket.entities.Product;
+import ru.geekbrains.marchmarket.exceptions.ResourceNotFoundException;
 import ru.geekbrains.marchmarket.repositories.ProductRepository;
 
 import java.util.List;
@@ -12,27 +13,26 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ProductService {
-
     private final ProductRepository productRepository;
+    private final CategoryService categoryService;
 
-    public List<Product> findAll(){
+    public List<Product> findAll() {
         return productRepository.findAll();
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         productRepository.deleteById(id);
     }
 
-    public void createNewProduct(CreateNewProductDto createNewProductDto){
+    public void createNewProduct(ProductDto productDto) {
         Product product = new Product();
-        product.setTitle(createNewProductDto.getTitle());
-        product.setPrice(createNewProductDto.getPrice());
+        product.setTitle(productDto.getTitle());
+        product.setPrice(productDto.getPrice());
+        product.setCategory(categoryService.findByTitle(productDto.getCategoryTitle()).orElseThrow(() -> new ResourceNotFoundException("Категория с названием: " + productDto.getCategoryTitle() + " не найдена")));
         productRepository.save(product);
     }
 
-    public Product findById(Long id){
-        System.out.println(id);
-        return productRepository.findById(id).orElse(null);
+    public Optional<Product> findById(Long id) {
+        return productRepository.findById(id);
     }
-
 }
