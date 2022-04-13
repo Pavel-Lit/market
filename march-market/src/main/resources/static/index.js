@@ -23,12 +23,22 @@ angular.module('market', []).controller('indexController', function ($scope, $ht
             });
     }
 
+
+    $scope.login = function (){
+        console.log($scope.user)
+        $http.post('http://localhost:8189/market/auth', $scope.user)
+            .then(function (response){
+               // $scope.user = null;
+                $scope.token = response.data.token;
+                console.log(response)
+            });
+    }
+
     $scope.addProductToCart = function (id){
         $http.get('http://localhost:8189/market/api/v1/cart/add/' + id)
             .then(function (response){
                 $scope.fillCart();
-                }
-            );
+                });
     }
     $scope.fillCart = function (){
         $http.get('http://localhost:8189/market/api/v1/cart')
