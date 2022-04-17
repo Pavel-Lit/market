@@ -30,7 +30,6 @@ public class CartController {
         return cartConverter.getCartDto(cartService.getCurrentCart());
     }
 
-
     @GetMapping("/add/{productId}")
     public void addProductToCart(@PathVariable Long productId) {
         cartService.addToCart(productId);
