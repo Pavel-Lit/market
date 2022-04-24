@@ -1,18 +1,14 @@
 package ru.geekbrains.march.market.core.services;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import ru.geekbrains.march.market.api.CartDto;
 import ru.geekbrains.march.market.api.CartItemDto;
-import ru.geekbrains.march.market.core.converters.ProductConverter;
 import ru.geekbrains.march.market.core.entities.Order;
 import ru.geekbrains.march.market.core.entities.OrderItem;
 import ru.geekbrains.march.market.core.entities.Product;
-import ru.geekbrains.march.market.core.entities.User;
 import ru.geekbrains.march.market.core.integrations.CartServiceIntegration;
-import ru.geekbrains.march.market.core.repositories.OrderItemRepository;
 import ru.geekbrains.march.market.core.repositories.OrderRepository;
 
 import java.util.ArrayList;
@@ -21,21 +17,21 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class OrderService {
-    private final UserService userService;
+//    private final UserService userService;
     private final CartServiceIntegration cartServiceIntegration;
     private final OrderRepository orderRepository;
     private final ProductService productService;
 
 
     public void createOrder(String username) {
-        if (username != null) {
+
             CartDto cartDto = cartServiceIntegration.getCurrentCart();
             Order order = new Order();
             order.setTotalPrice(cartDto.getTotalPrice());
-            order.setUser(userService.findIdByUsername(username));
+            order.setUsername(username);
             order.setItems(parseCartItems(cartDto.getItems(), order));
             orderRepository.save(order);
-        } else throw new UsernameNotFoundException("Вы не авторизованы");
+
     }
 
     public List<OrderItem> parseCartItems(List<CartItemDto> list, Order order) {

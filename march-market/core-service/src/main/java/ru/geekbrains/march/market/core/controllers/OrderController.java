@@ -14,7 +14,6 @@ import java.security.Principal;
 @RestController
 @RequestMapping("/api/v1/orders")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class OrderController {
     private final OrderService orderService;
 
@@ -22,9 +21,9 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createNewOrder(Principal principal) {
+    public void createNewOrder(@RequestHeader String username) {
 
-        orderService.createOrder(principal.getName());
+        orderService.createOrder(username);
     }
 
 }
