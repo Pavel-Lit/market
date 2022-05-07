@@ -1,8 +1,9 @@
-package ru.geekbrains.march.market.core.converters;
+package ru.geekbrains.march.market.auth.converters;
 
 import org.springframework.stereotype.Component;
 import ru.geekbrains.march.market.api.UserDto;
-import ru.geekbrains.march.market.core.entities.User;
+import ru.geekbrains.march.market.auth.entities.User;
+
 
 @Component
 public class UserConverter {
