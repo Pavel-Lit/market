@@ -35,9 +35,6 @@ public class CartService {
         cart.add(p);
     }
 
-
-
-
     public void clearCart(){
         cart.clear();
     }
