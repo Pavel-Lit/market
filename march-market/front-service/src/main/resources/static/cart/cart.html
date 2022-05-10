@@ -1,0 +1,58 @@
+<div>
+    <h3>Корзина с товарами</h3>
+    <div ng-show="cartList.items.length > 0">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Название</td>
+
+            <td>Колличество</td>
+
+            <td>Цена за шт.</td>
+            <td>Общая стоимость</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="c in cartList.items">
+            <td>{{c.productId}}</td>
+            <td>{{c.productTitle}}</td>
+            <td><button type="button" class="btn btn-primary btn-sm" ng-click="addProductToCart(c.productId)">+
+            </button>
+                {{c.quantity}}
+                <button type="button" class="btn btn-primary btn-sm" ng-click="deleteOneProductFromCart(c.productId)">-
+                </button>
+            </td>
+
+            <td>{{c.pricePerProduct}}</td>
+            <td>{{c.price}}</td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td>Итого:</td>
+            <td>{{cartList.totalPrice}}</td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <p>
+        {{total}}
+    </p>
+
+    <div>
+        <button type="button" class="btn btn-danger" ng-click="clearCart()" align=”left”>Очистить корзину</button>
+    </div>
+    <br>
+    <div>
+        <button class="btn btn-secondary" ng-click="guestCreateOrder()" ng-show="!isUserLoggedIn()">Оформить заказ</button>
+        <button type="button" class="btn btn-primary" ng-click="createNewOrder()" ng-show="isUserLoggedIn()" align=”left”>Создать заказ</button>
+    </div>
+    </div>
+
+    <div ng-show="cartList.items.length == 0">
+        <p>Ваша корзина пуста</p>
+    </div>
+    <br>
+</div>

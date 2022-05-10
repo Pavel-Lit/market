@@ -3,12 +3,11 @@ package ru.geekbrains.march.market.core.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.march.market.core.integrations.CartServiceIntegration;
+import ru.geekbrains.march.market.api.OrderDto;
 import ru.geekbrains.march.market.core.services.OrderService;
 
 
-import java.security.Principal;
-
+import java.util.List;
 
 
 @RestController
@@ -17,8 +16,10 @@ import java.security.Principal;
 public class OrderController {
     private final OrderService orderService;
 
-
-
+    @GetMapping
+    public List<OrderDto> gerUserOrder(@RequestHeader String username){
+        return orderService.getUserOrders(username);
+    }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createNewOrder(@RequestHeader String username) {

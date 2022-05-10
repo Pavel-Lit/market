@@ -31,16 +31,16 @@ public class OrderServiceTest {
     @MockBean
     private ProductService productService;
 
-    @Test
-    public void createOrderTest(){
-        CartDto cartDto = new CartDto();
-        cartDto.setItems(Collections.emptyList());
-        cartDto.setTotalPrice(BigDecimal.ZERO);
-
-        Mockito.doReturn(cartDto).when(cartServiceIntegration).getCurrentCart();
-        orderService.createOrder("Bob");
-        Mockito.verify(orderRepository, Mockito.times(1)).save(ArgumentMatchers.any());
-    }
+//    @Test
+//    public void createOrderTest(){
+//        CartDto cartDto = new CartDto();
+//        cartDto.setItems(Collections.emptyList());
+//        cartDto.setTotalPrice(BigDecimal.ZERO);
+//
+//        Mockito.doReturn(cartDto).when(cartServiceIntegration).getCurrentCart();
+//        orderService.createOrder("Bob");
+//        Mockito.verify(orderRepository, Mockito.times(1)).save(ArgumentMatchers.any());
+//    }
 
 
 }
