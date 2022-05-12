@@ -23,6 +23,12 @@ public class Order {
     @Column(name = "total_price")
     private BigDecimal totalPrice;
 
+    @Column(name="address")
+    private String address;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> items;
 
@@ -85,10 +91,28 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id, String username, BigDecimal totalPrice, List<OrderItem> items, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Order(Long id, String username, BigDecimal totalPrice, String address, String phoneNumber, List<OrderItem> items, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.username = username;
         this.totalPrice = totalPrice;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
         this.items = items;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;

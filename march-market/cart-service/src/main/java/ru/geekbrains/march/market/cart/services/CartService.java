@@ -2,7 +2,6 @@ package ru.geekbrains.march.market.cart.services;
 
 import lombok.RequiredArgsConstructor;
 import ru.geekbrains.march.market.api.ProductDto;
-import ru.geekbrains.march.market.cart.exceptions.ResourceNotFoundException;
 import ru.geekbrains.march.market.cart.integrations.ProductServiceIntegration;
 import ru.geekbrains.march.market.cart.utils.Cart;
 
@@ -10,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 
 import javax.annotation.PostConstruct;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,9 +45,12 @@ public class CartService {
         getCurrentCart(cartId).deleteProductFormCart(id);
     }
 
+    public void mergeCart(String cartId, String username){
+        getCurrentCart(cartId);
+        getCurrentCart(username);
 
 
-//    public BigDecimal getTotalPrice(){
-//        return getCurrentCart().getTotalPrice();
-//    }
+    }
+
+
 }

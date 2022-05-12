@@ -48,7 +48,10 @@ public class CartController {
 
     }
 
+    @GetMapping("{guestCartId}/merge")
+    public void megreCart(@RequestHeader(required = false) String username, @PathVariable String guestCartId){
 
+    }
 
     private String selectCartId(String username, String guestCartId){
         if(username != null){
