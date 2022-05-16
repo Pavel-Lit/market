@@ -46,10 +46,8 @@ public class CartService {
     }
 
     public void mergeCart(String cartId, String username){
-        getCurrentCart(cartId);
-        getCurrentCart(username);
-
-
+        carts.put(username, getCurrentCart(cartId));
+//        carts.remove(cartId);
     }
 
 

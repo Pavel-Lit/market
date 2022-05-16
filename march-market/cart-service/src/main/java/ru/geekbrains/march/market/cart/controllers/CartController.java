@@ -19,7 +19,7 @@ public class CartController {
     private final CartConverter cartConverter;
 
     @GetMapping("/generate_id")
-    public StringResponse generateCartId(){
+    public StringResponse generateCartId() {
         return new StringResponse(UUID.randomUUID().toString());
     }
 
@@ -36,7 +36,7 @@ public class CartController {
     }
 
     @GetMapping("/{guestCartId}/remove/{id}")
-    public void removeOneProductFromCart(@RequestHeader(required = false) String username, @PathVariable String guestCartId,@PathVariable Long id) {
+    public void removeOneProductFromCart(@RequestHeader(required = false) String username, @PathVariable String guestCartId, @PathVariable Long id) {
         String currentCartId = selectCartId(username, guestCartId);
         cartService.removeById(currentCartId, id);
     }
@@ -49,14 +49,17 @@ public class CartController {
     }
 
     @GetMapping("{guestCartId}/merge")
-    public void megreCart(@RequestHeader(required = false) String username, @PathVariable String guestCartId){
-
+    public void mergeCarts(@RequestHeader String username, @PathVariable String guestCartId) {
+        cartService.mergeCart(guestCartId, username);
     }
 
-    private String selectCartId(String username, String guestCartId){
-        if(username != null){
+
+    private String selectCartId(String username, String guestCartId) {
+        if (username != null) {
             return username;
         }
         return guestCartId;
     }
+
+
 }
