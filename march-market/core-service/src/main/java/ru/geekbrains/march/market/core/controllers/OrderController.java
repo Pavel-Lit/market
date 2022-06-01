@@ -22,9 +22,9 @@ public class OrderController {
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createNewOrder(@RequestHeader String username) {
+    public void createNewOrder(@RequestHeader String username, @RequestBody OrderDto orderDto) {
 
-        orderService.createOrder(username);
+        orderService.createOrder(username, orderDto.getAddress(), orderDto.getPhoneNumber());
     }
 
 }

@@ -22,7 +22,7 @@ angular.module('market').controller('cartController', function ($scope, $http, $
     }
 
     $scope.createNewOrder = function (){
-        $http.post('http://localhost:5555/core/api/v1/orders')
+        $http.post('http://localhost:5555/core/api/v1/orders', $scope.newOrder)
             .then(function (response){
 
                 console.log(response);

@@ -18,6 +18,8 @@ public class OrderConverter {
             orderDto.setId(order.getId());
             orderDto.setList(order.getItems().stream().map(orderItemConverter::entityToDto).collect(Collectors.toList()));
             orderDto.setTotalPrice(order.getTotalPrice());
+            orderDto.setAddress(order.getAddress());
+            orderDto.setPhoneNumber(order.getPhoneNumber());
             return orderDto;
         }
 }

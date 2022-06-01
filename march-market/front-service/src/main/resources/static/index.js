@@ -22,6 +22,10 @@
                 templateUrl: 'orders/order.html',
                 controller: 'ordersController'
             })
+            .when('/registration',{
+                templateUrl: 'registration/registration.html',
+                controller: 'registrationController'
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -65,7 +69,7 @@ angular.module('market').controller('indexController', function ($rootScope, $sc
 
                     $scope.user.username = null;
                     $scope.user.password = null;
-
+                    $http.get('http://localhost:5555/cart/api/v1/cart/' + $localStorage.marchMarketGuestCartId + '/merge')
                     $location.path('/');
                 }
             }, function errorCallback(response) {
@@ -82,11 +86,21 @@ angular.module('market').controller('indexController', function ($rootScope, $sc
         $http.defaults.headers.common.Authorization = '';
     };
 
+    $scope
+
     $rootScope.isUserLoggedIn = function () {
         if ($localStorage.marchMarketUser) {
             return true;
         } else {
             return false;
         }
+    };
+
+    $scope.about = function (){
+        $http.get('http://localhost:5555/auth/about')
+            .then(function (response){
+                console.log(response)
+                alert("Имя пользователя: "+response.data.name + "\nemail: "+ response.data.email)
+            });
     };
 });

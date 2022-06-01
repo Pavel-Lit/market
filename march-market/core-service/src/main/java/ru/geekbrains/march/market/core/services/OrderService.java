@@ -28,7 +28,7 @@ public class OrderService {
     private final OrderConverter orderConverter;
 
     @Transactional
-    public void createOrder(String username) {
+    public void createOrder(String username, String address, String phoneNumber) {
 
             CartDto cartDto = cartServiceIntegration.getCurrentCart(username);
             if (cartDto.getItems().isEmpty()) {
@@ -38,6 +38,8 @@ public class OrderService {
                 order.setTotalPrice(cartDto.getTotalPrice());
                 order.setUsername(username);
                 order.setItems(parseCartItems(cartDto.getItems(), order));
+                order.setAddress(address);
+                order.setPhoneNumber(phoneNumber);
                 orderRepository.save(order);
                 cartServiceIntegration.clearCart(username);
 
