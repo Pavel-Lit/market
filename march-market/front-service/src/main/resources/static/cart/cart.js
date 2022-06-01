@@ -3,21 +3,19 @@ angular.module('market').controller('cartController', function ($scope, $http, $
         $http.get('http://localhost:5555/cart/api/v1/cart/'+ $localStorage.marchMarketGuestCartId)
             .then(function (response){
                 $scope.cartList = response.data;
-                console.log(response);
+                console.log($scope.cartList)
             })
     }
     $scope.clearCart = function (){
         $http.get('http://localhost:5555/cart/api/v1/cart/'+ $localStorage.marchMarketGuestCartId+'/clear')
             .then(function (response){
                 $scope.fillCart();
-                console.log(response);
             })
     }
     $scope.deleteOneProductFromCart = function (productId){
         $http.get('http://localhost:5555/cart/api/v1/cart/'+ $localStorage.marchMarketGuestCartId+'/remove/' + productId)
             .then(function (response){
                 $scope.fillCart();
-                console.log(response);
             })
     }
 

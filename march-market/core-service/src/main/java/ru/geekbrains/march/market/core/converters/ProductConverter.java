@@ -23,8 +23,8 @@ public class ProductConverter {
     public List<ProductDto> entityToListProduct(List<Product> productList){
         List<ProductDto> productDtoList = new ArrayList<>();
 
-        for (int i = 0; i < productList.size(); i++) {
-            productDtoList.add(entityToDto(productList.get(i)));
+        for (Product product : productList) {
+            productDtoList.add(entityToDto(product));
 
         }
         return productDtoList;
