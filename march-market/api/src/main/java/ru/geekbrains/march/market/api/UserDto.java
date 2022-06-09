@@ -1,11 +1,14 @@
 package ru.geekbrains.march.market.api;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 
-
+@Schema(description = "Модель пользователя")
 public class UserDto {
-
+    @Schema(description = "ID пользователя", required = true, example = "1")
     private Long id;
+    @Schema(description = "Имя пользователя", required = true, maxLength = 36, example = "David")
     private String name;
+    @Schema(description = "Электронная почта", required = true, maxLength = 50, example = "2@2.ru")
     private String email;
 
     public Long getId() {

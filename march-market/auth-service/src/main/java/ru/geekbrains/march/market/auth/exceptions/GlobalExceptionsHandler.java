@@ -15,6 +15,6 @@ public class GlobalExceptionsHandler {
 
     @ExceptionHandler
     public ResponseEntity<AppError> handelIllegalStateException(IllegalStateException e) {
-        return new ResponseEntity<>(new AppError("ILLEGAL_DATA_STATE", e.getMessage()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new AppError("ILLEGAL_DATA_STATE", e.getMessage()), HttpStatus.CONFLICT);
     }
 }
