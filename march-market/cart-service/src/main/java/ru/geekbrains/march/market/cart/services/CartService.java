@@ -5,13 +5,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import ru.geekbrains.march.market.api.ProductDto;
 import ru.geekbrains.march.market.cart.integrations.ProductServiceIntegration;
 import ru.geekbrains.march.market.cart.utils.Cart;
-
 import org.springframework.stereotype.Service;
-
-
-import javax.annotation.PostConstruct;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Consumer;
 
 @Service
@@ -41,13 +35,10 @@ public class CartService {
     }
 
     public void removeById(String cartId, Long id) {
-//        getCurrentCart(cartId).deleteProductFormCart(id);
         execute(cartId, cart -> cart.deleteProductFormCart(id));
     }
 
     public void mergeCart(String cartId, String username) {
-//        carts.put(username, getCurrentCart(cartId));
-//        carts.remove(cartId);
         redisTemplate.opsForValue().set(username, getCurrentCart(cartId));
     }
 

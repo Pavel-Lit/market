@@ -1,10 +1,15 @@
 package ru.geekbrains.march.market.api;
 
-import java.util.List;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.List;
+@Schema(description = "Модель для пагинации")
 public class PageDto {
+    @Schema(description = "Списко элементов приходящих при запросе", required = true, example = "Хлеб, Молоко")
     private List<ProductDto> content;
+    @Schema(description = "Колличество страниц", required = true, example = "4")
     private int totalPages;
+    @Schema(description = "Текущая страница", required = true, example = "2")
     private int number;
 
     public List<ProductDto> getContent() {

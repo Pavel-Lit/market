@@ -1,13 +1,20 @@
 package ru.geekbrains.march.market.api;
 
-import java.math.BigDecimal;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.math.BigDecimal;
+@Schema(description = "Модель элемнат заказа")
 public class OrderItemDto {
 
+    @Schema(description = "Нормер заказа", required = true, example = "2")
     private Long orderId;
+    @Schema(description = "Наименование продукта", required = true, example = "Хлеб")
     private String productTitle;
+    @Schema(description = "Колличество заказанных продуктов", required = true, example = "5")
     private int quantity;
+    @Schema(description = "Стоимость одного продукта", required = true, example = "10")
     private BigDecimal pricePerProduct;
+    @Schema(description = "Стоимость всего заказа", required = true, example = "1000")
     private BigDecimal totalPrice;
 
     public OrderItemDto(Long productId, String productTitle, int quantity, BigDecimal pricePerProduct, BigDecimal totalPrice) {
